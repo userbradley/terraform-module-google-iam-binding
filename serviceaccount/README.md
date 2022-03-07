@@ -1,16 +1,5 @@
 
 
-## Example
-
-```hcl
-module "cloudrun-binding" {
-  source = "./modules/binding"
-  email  = google_service_account.cloudrun.email
-  project = var.project
-  role = google_project_iam_custom_role.cloudrun.role_id
-}
-```
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -22,3 +11,25 @@ module "cloudrun-binding" {
 ## Outputs
 
 No outputs.
+
+## Example with role defined in terraform
+
+```hcl
+module "cloudrun-binding" {
+  source = "./modules/binding"
+  email  = google_service_account.cloudrun.email
+  project = var.project
+  role = google_project_iam_custom_role.cloudrun.role_id
+}
+```
+
+## Example with role already in GCP
+
+```hcl
+module "serviceaccount-binding" {
+  source = "./modules/binding"
+  email  = google_service_account.cloudrun.email
+  project = var.project
+  role = "CustomServiceAccountActAs"
+}
+```
